@@ -31,7 +31,7 @@ def main():
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     bg_img = pg.image.load("ex02/fig/pg_bg.jpg")
     kk_img = pg.image.load("ex02/fig/3.png")
-    kkgo_img = pg.image.load("ex02/fig/9.png")
+    kkgo_img = pg.image.load("ex02/fig/8.png")
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
     kkgo_img = pg.transform.rotozoom(kkgo_img, 0, 2.0)
     # こうかとんSurface（kk_img）からこうかとんRect（kk_rct）を抽出する
@@ -53,6 +53,15 @@ def main():
     gameover = False
     gameovertime = 3000
     
+    key_lis = {(-5, 0): pg.transform.rotozoom(kk_img, 0, 1.0), 
+               (-5, -5): pg.transform.rotozoom(kk_img, -45, 1.0),
+               (0, -5): pg.transform.flip(pg.transform.rotozoom(kk_img, -90, 1.0), True, False),
+               (+5, -5): pg.transform.flip(pg.transform.rotozoom(kk_img, -45, 1.0), True, False),
+               (+5, 0): pg.transform.flip(kk_img, True, False),
+               (+5, +5): pg.transform.flip(pg.transform.rotozoom(kk_img, 45, 1.0), True, False),
+               (0, +5): pg.transform.flip(pg.transform.rotozoom(kk_img, 90, 1.0), True, False),
+               (-5, +5): pg.transform.rotozoom(kk_img, 45, 1.0)}
+    
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
@@ -71,6 +80,10 @@ def main():
             if key_lst[k]: 
                 sum_mv[0] += mv[0]
                 sum_mv[1] += mv[1]
+            for l, m in key_lis.items():
+                if sum_mv[0] ==l[0] and sum_mv[1] == l[1]:
+                    kk_img = m
+                
         kk_rct.move_ip(sum_mv)
         if check_bound(kk_rct) != (True, True):
             kk_rct.move_ip(-sum_mv[0], -sum_mv[1])
