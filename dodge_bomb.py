@@ -1,7 +1,6 @@
 import random
 import sys
 import pygame as pg
-import time
 WIDTH, HEIGHT = 1600, 900
 delta = {
     pg.K_UP: (0, -5),
