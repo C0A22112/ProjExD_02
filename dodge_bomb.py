@@ -58,16 +58,15 @@ def main():
                 return
             
         if kk_rct.colliderect(bd_rct):  # 練習５
-            print("ゲームオーバー")
+            #print("ゲームオーバー")
             gameover = True
-              # ゲームオーバー 
+
         
-        if gameover:
-            #追加機能３　ゲームオーバーの
-            screen.blit(kkgo_img,kk_rct)
+        if gameover:  #追加機能３　コウカトンの画像変更とreturnの処理
+            screen.blit(kkgo_img,kk_rct)  #コウカトンの泣いた画像
             pg.display.update()
-            pg.time.delay(gameovertime)
-            return
+            pg.time.delay(gameovertime)  #停止処理
+            return  # ゲームオーバー 
 
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]  # 合計移動量
@@ -92,7 +91,7 @@ def main():
         tmr += 1
         clock.tick(100)
         
-        accs = [a for a in range(1, 11)]  #追加機能２
+        accs = [a for a in range(1, 11)]  #追加機能２ 爆弾の拡大
         bd_imgs = []
         for r in range(1,11):
             bd_img = pg.Surface((20*r, 20*r))
