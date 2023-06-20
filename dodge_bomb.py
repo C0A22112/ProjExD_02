@@ -1,6 +1,7 @@
 import random
 import sys
 import pygame as pg
+import time
 WIDTH, HEIGHT = 1600, 900
 delta = {
     pg.K_UP: (0, -5),
@@ -30,7 +31,9 @@ def main():
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     bg_img = pg.image.load("ex02/fig/pg_bg.jpg")
     kk_img = pg.image.load("ex02/fig/3.png")
+    kkgo_img = pg.image.load("ex02/fig/9.png")
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
+    kkgo_img = pg.transform.rotozoom(kkgo_img, 0, 2.0)
     # こうかとんSurface（kk_img）からこうかとんRect（kk_rct）を抽出する
     kk_rct = kk_img.get_rect()
     kk_rct.center = 900, 400
@@ -46,14 +49,24 @@ def main():
     vx, vy = +5, +5  # 練習２
     clock = pg.time.Clock()
     tmr = 0
+    gameover = False
+    gameovertime = 3000
+    
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
                 return
-
+            
         if kk_rct.colliderect(bd_rct):  # 練習５
             print("ゲームオーバー")
-            return   # ゲームオーバー 
+            gameover = True
+              # ゲームオーバー 
+        
+        if gameover:
+            screen.blit(kkgo_img,kk_rct)
+            pg.display.update()
+            pg.time.delay(gameovertime)
+            return
 
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]  # 合計移動量
@@ -78,7 +91,7 @@ def main():
         tmr += 1
         clock.tick(50)
         
-        accs = [a for a in range(1, 11)]
+        accs = [a for a in range(1, 11)]  #追加機能２
         bd_imgs = []
         for r in range(1,11):
             bd_img = pg.Surface((20*r, 20*r))
