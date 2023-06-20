@@ -47,6 +47,7 @@ def main():
     # 爆弾Rectの中心座標を乱数で指定する
     bd_rct.center = x, y 
     vx, vy = +5, +5  # 練習２
+    bd_imgs = []
     clock = pg.time.Clock()
     tmr = 0
     gameover = False
@@ -62,11 +63,7 @@ def main():
             gameover = True
 
         
-        if gameover:  #追加機能３　コウカトンの画像変更とreturnの処理
-            screen.blit(kkgo_img,kk_rct)  #コウカトンの泣いた画像
-            pg.display.update()
-            pg.time.delay(gameovertime)  #停止処理
-            return  # ゲームオーバー 
+        
 
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]  # 合計移動量
@@ -79,6 +76,15 @@ def main():
             kk_rct.move_ip(-sum_mv[0], -sum_mv[1])
  
         screen.blit(bg_img, [0, 0])
+        
+        
+        if gameover:  #追加機能３　コウカトンの画像変更とreturnの処理
+            screen.blit(kkgo_img, kk_rct)  #コウカトンの泣いた画像
+            pg.display.update()
+            pg.time.delay(gameovertime)  #停止処理
+            return  # ゲームオーバー 
+        
+        
         screen.blit(kk_img, kk_rct)
         bd_rct.move_ip(vx, vy)  # 練習２
         yoko, tate = check_bound(bd_rct)
@@ -91,9 +97,8 @@ def main():
         tmr += 1
         clock.tick(100)
         
-        accs = [a for a in range(1, 11)]  #追加機能２ 爆弾の拡大
-        bd_imgs = []
-        for r in range(1,11):
+        
+        for r in range(1,11):  #追加機能２ 爆弾の拡大
             bd_img = pg.Surface((20*r, 20*r))
             pg.draw.circle(bd_img, (255,0,0), (10*r, 10*r),10*r)
             bd_imgs.append(bd_img)
