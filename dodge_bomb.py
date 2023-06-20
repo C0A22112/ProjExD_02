@@ -18,7 +18,7 @@ def main():
     y = random.randint(0, HEIGHT)
     bd_rct = bd_img.get_rect()
     bd_rct.center = x, y
-    
+    vx, vy = +5, +5
     clock = pg.time.Clock()
     tmr = 0
     
@@ -30,7 +30,7 @@ def main():
 
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, [900, 400])
-        
+        bd_rct.move_ip(vx, vy)
         pg.display.update()
         tmr += 1
         clock.tick(50)
