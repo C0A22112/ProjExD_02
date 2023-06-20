@@ -52,7 +52,7 @@ def main():
     gameover = False
     gameovertime = 3000
     
-    key_lis = {(-5, 0): pg.transform.rotozoom(kk_img, 0, 1.0), 
+    key_lis = {(-5, 0): pg.transform.rotozoom(kk_img, 0, 1.0), #追加機能１　コウカトンの向き
                (-5, -5): pg.transform.rotozoom(kk_img, -45, 1.0),
                (0, -5): pg.transform.flip(pg.transform.rotozoom(kk_img, -90, 1.0), True, False),
                (+5, -5): pg.transform.flip(pg.transform.rotozoom(kk_img, -45, 1.0), True, False),
