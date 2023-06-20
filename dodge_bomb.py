@@ -63,6 +63,7 @@ def main():
               # ゲームオーバー 
         
         if gameover:
+            #追加機能３　ゲームオーバーの
             screen.blit(kkgo_img,kk_rct)
             pg.display.update()
             pg.time.delay(gameovertime)
@@ -89,7 +90,7 @@ def main():
         screen.blit(bd_img, bd_rct)
         pg.display.update()
         tmr += 1
-        clock.tick(50)
+        clock.tick(100)
         
         accs = [a for a in range(1, 11)]  #追加機能２
         bd_imgs = []
